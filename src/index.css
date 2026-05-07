@@ -2,104 +2,143 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 0 0% 4%;
+    --foreground: 40 30% 88%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 7%;
+    --card-foreground: 40 30% 88%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 40 30% 88%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 350 75% 38%;
+    --primary-foreground: 40 60% 95%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 270 30% 18%;
+    --secondary-foreground: 40 30% 88%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 40 10% 60%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 45 85% 55%;
+    --accent-foreground: 0 0% 5%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 80% 45%;
+    --destructive-foreground: 40 60% 95%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 40 20% 25%;
+    --input: 0 0% 10%;
+    --ring: 45 85% 55%;
 
-    --radius: 0.5rem;
+    --radius: 0px;
 
-    --sidebar-background: 0 0% 98%;
+    /* Game palette */
+    --ash: 40 8% 55%;
+    --blood: 350 80% 35%;
+    --void: 270 40% 15%;
+    --gold: 45 85% 55%;
+    --holy: 50 90% 88%;
+    --abyss: 260 30% 8%;
+    --ember: 18 90% 50%;
+    --frost: 195 80% 60%;
+    --bone: 40 30% 80%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    --gradient-abyss: linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(270 30% 8%) 60%, hsl(350 60% 12%) 100%);
+    --gradient-ember: radial-gradient(circle at 50% 100%, hsl(18 90% 40% / 0.6), transparent 60%);
+    --gradient-holy: radial-gradient(circle at 50% 0%, hsl(50 90% 80% / 0.5), transparent 70%);
 
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --shadow-pixel: 0 4px 0 0 hsl(0 0% 0% / 0.8);
+    --shadow-glow-blood: 0 0 12px hsl(var(--blood) / 0.7);
+    --shadow-glow-gold: 0 0 8px hsl(var(--gold) / 0.6);
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-
+  * { @apply border-border; }
+  html, body, #root { height: 100%; margin: 0; padding: 0; overscroll-behavior: none; }
   body {
     @apply bg-background text-foreground;
+    font-family: 'DotGothic16', 'Press Start 2P', monospace;
+    image-rendering: pixelated;
+    -webkit-font-smoothing: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
+}
+
+@layer components {
+  .pixel-font { font-family: 'Press Start 2P', monospace; }
+  .jp-font { font-family: 'DotGothic16', monospace; }
+
+  .pixel-border {
+    border: 2px solid hsl(var(--border));
+    box-shadow:
+      inset 0 0 0 2px hsl(0 0% 0%),
+      0 0 0 2px hsl(var(--border)),
+      var(--shadow-pixel);
+  }
+  .pixel-panel {
+    background: hsl(var(--abyss));
+    border: 2px solid hsl(var(--gold) / 0.6);
+    box-shadow: inset 0 0 0 1px hsl(0 0% 0%), 0 0 12px hsl(0 0% 0% / 0.8);
+  }
+  .pixel-btn {
+    background: linear-gradient(180deg, hsl(var(--secondary)) 0%, hsl(var(--abyss)) 100%);
+    border: 2px solid hsl(var(--gold) / 0.7);
+    color: hsl(var(--bone));
+    box-shadow: 0 3px 0 hsl(0 0% 0%), inset 0 0 0 1px hsl(0 0% 0% / 0.5);
+    transition: transform 60ms, box-shadow 60ms;
+    image-rendering: pixelated;
+  }
+  .pixel-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 hsl(0 0% 0%); }
+  .pixel-btn-blood { border-color: hsl(var(--blood)); color: hsl(var(--holy)); }
+  .pixel-btn-gold { border-color: hsl(var(--gold)); color: hsl(var(--gold)); }
+
+  .scanlines::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(180deg, transparent 0 2px, hsl(0 0% 0% / 0.18) 2px 3px);
+    mix-blend-mode: multiply;
+  }
+  .vignette::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 50%, hsl(0 0% 0% / 0.7) 100%);
+  }
+
+  .text-glow-blood { text-shadow: 0 0 6px hsl(var(--blood)), 0 2px 0 hsl(0 0% 0%); }
+  .text-glow-gold { text-shadow: 0 0 6px hsl(var(--gold) / 0.8), 0 2px 0 hsl(0 0% 0%); }
+  .text-glow-holy { text-shadow: 0 0 8px hsl(var(--holy)), 0 2px 0 hsl(0 0% 0%); }
+
+  .hp-bar { background: hsl(0 0% 8%); border: 1px solid hsl(var(--border)); height: 10px; position: relative; }
+  .hp-bar > span { display: block; height: 100%; transition: width 300ms; }
+
+  @keyframes shake { 0%,100%{transform:translate(0,0)} 25%{transform:translate(-4px,2px)} 50%{transform:translate(3px,-2px)} 75%{transform:translate(-2px,3px)} }
+  .anim-shake { animation: shake 320ms steps(4); }
+  @keyframes flash { 0%,100%{filter:none} 50%{filter:brightness(2.5) hue-rotate(-30deg)} }
+  .anim-flash { animation: flash 280ms; }
+  @keyframes float-up { 0%{opacity:1; transform:translate(-50%,0)} 100%{opacity:0; transform:translate(-50%,-40px)} }
+  .anim-float { animation: float-up 900ms ease-out forwards; }
+  @keyframes glitch {
+    0%,100%{transform:translate(0,0); filter:none}
+    20%{transform:translate(-3px,1px); filter:hue-rotate(40deg)}
+    40%{transform:translate(2px,-2px); filter:invert(1)}
+    60%{transform:translate(-1px,2px)}
+    80%{transform:translate(3px,0); filter:hue-rotate(-40deg)}
+  }
+  .anim-glitch { animation: glitch 600ms steps(6) infinite; }
+  @keyframes pulse-ember { 0%,100%{opacity:.7} 50%{opacity:1} }
+  .anim-pulse { animation: pulse-ember 1.4s ease-in-out infinite; }
+  @keyframes ember-rise {
+    0%{transform:translateY(0); opacity:0}
+    20%{opacity:1}
+    100%{transform:translateY(-200px); opacity:0}
+  }
+  .ember { position: absolute; width: 4px; height: 4px; background: hsl(var(--ember)); animation: ember-rise 4s linear infinite; box-shadow: 0 0 6px hsl(var(--ember)); }
+
+  /* Pixel sprite drawn with box-shadow grid */
+  .sprite { width: 8px; height: 8px; position: relative; }
 }
