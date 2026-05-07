@@ -26,7 +26,7 @@ export function createInitialPlayer(): PlayerState {
 
 export function computeEffectiveStats(p: PlayerState) {
   const s = { ...p.stats };
-  let darkBoost = 0;
+  let darkBoost = p.darkAffinity || 0;
   let mpDrain = 0;
   for (const slot of ["weapon", "head", "body", "acc1", "acc2"] as const) {
     const id = p.equipment[slot]; if (!id) continue;
