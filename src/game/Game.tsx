@@ -241,6 +241,7 @@ export function Game() {
     return <StoryScreen text={mode.question} choices={mode.choices} onContinue={(v) => mode.onChoose(v!)} />;
   }
   if (mode.type === "map") {
+    const stageKey = inAbyss ? 99 : player.stage;
     return <ExplorationMap
       stageName={stage.name}
       stageId={inAbyss ? 8 : player.stage}
@@ -248,11 +249,31 @@ export function Game() {
       encounterIndex={player.encounterIndex}
       hasBoss={!!stage.boss}
       hasShard={!!stage.shard}
-      shardTaken={!!shardTakenStage[player.stage]}
+      shardTaken={!!shardTakenStage[stageKey]}
+      treasureTaken={!!shardTakenStage[stageKey + 1000]}
       onEncounter={onEncounter}
       onBoss={onBossEnter}
       onShard={onShard}
-      onMenu={(m) => m === "equip" ? setMode({ type: "equip" }) : setMode({ type: "title" })}
+      onTreasure={() => {
+        setShardTakenStage(s => ({ ...s, [stageKey + 1000]: true }));
+        setPlayer({ ...player, potions: player.potions + 2, ethers: player.ethers + 1 });
+      }}
+      onExit={() => {
+        // only meaningful when stage has no boss; advance to next stage
+        if (stage.boss) return;
+        const nextStageId = player.stage + 1;
+        if (nextStageId >= STAGES.length) return;
+        const p = { ...player, stage: nextStageId, encounterIndex: 0, stats: { ...player.stats, hp: player.stats.maxHp, mp: player.stats.maxMp } };
+        setPlayer(p);
+        setMode({ type: "story", stageId: nextStageId });
+      }}
+      onMenu={(m) => {
+        if (m === "equip") setMode({ type: "equip" });
+        else if (m === "upgrade") {
+          if (player.shards > 0) setMode({ type: "upgrade" });
+        }
+        else setMode({ type: "title" });
+      }}
     />;
   }
   if (mode.type === "battle") {
