@@ -1,1 +1,1 @@
-ash-crowned-revival.lovable.app
+https://ash-crowned-revival.lovable.app/
